@@ -1,51 +1,90 @@
-package test.java.uk.co.automationtesting;
+package java.uk.co.automationtesting;
 
-import base.ExtentManager;
-import base.Hooks;
+
 import com.github.javafaker.Faker;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.support.ui.ExpectedCondition;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import org.testng.Assert;
+import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
-import pageObjects.*;
 
+
+import java.base.ExtentManager;
+import java.base.Hooks;
 import java.io.IOException;
+import java.pageObjects.*;
 
-@Listeners(resources.Listeners.class)
+@Listeners(java.resources.Listeners.class)
 
-public class OrderCompleteTest extends Hooks {
-    public OrderCompleteTest() throws IOException {
+public class AddRemoveIItemBasketTest extends Hooks {
+    public AddRemoveIItemBasketTest() throws IOException {
         super();
     }
 
-    @Test(testName = "End")
-    public void endToEndTest() throws InterruptedException, IOException {
+    @Test
+    public void AddRemoveItemTest() throws IOException, InterruptedException {
 
-        ExtentManager.log("Starting OrderCompleteTest... ");
+        ExtentManager.log("Starting AddRemoveItemBasketTest... ");
 
         HomePage homePage = new HomePage();
         homePage.getCookie().click();
         Thread.sleep(2000);
         homePage.getTestStoreLink().click();
 
+        ShopHomePage shopHomePage = new ShopHomePage();
+
         ExtentManager.pass("Reached the shop homepage");
 
-        ShopHomePage shopHomePage = new ShopHomePage();
-        shopHomePage.getProductOne().click();
+        shopHomePage.getProductTwo().click();
 
         ShopProductPage shopProductPage = new ShopProductPage();
+
+        ExtentManager.pass("Reached the shop product page");
+
         Select option = new Select(shopProductPage.getSizeOption());
         option.selectByVisibleText("M");
+
+        ExtentManager.pass("Have successfully selevted produt size");
+
         shopProductPage.getQuantityIncrease().click();
+
+        ExtentManager.pass("Have successfully increased quantity");
+
         shopProductPage.getAddToCartButton().click();
 
         ShopContentPanel shopContentPanel = new ShopContentPanel();
+        Thread.sleep(2000);
+        shopContentPanel.getContinueShoppingButton().click();
+        shopProductPage.getHomePageLink().click();
+
+//        JavascriptExecutor js = (JavascriptExecutor)getDriver();
+//        js.executeScript("argument[0].scrollIntoView()");
+        shopHomePage.getProductEight().click();
+        shopProductPage.getQuantityIncrease().click();
+        shopProductPage.getAddToCartButton().click();
+        Thread.sleep(2000);
         shopContentPanel.getCheckoutButton().click();
 
         ShoppingCart shoppingCart = new ShoppingCart();
-        shoppingCart.getHavePromo().click();
-        shoppingCart.getPromoTextBox().sendKeys("20OFF");
-        shoppingCart.getPromoAddButton().click();
-        Thread.sleep(2000);
+        shoppingCart.getDeleteItemOne().click();
+
+        waitForElementInvisible(shoppingCart.getDeleteItemOne(), 2);
+
+
+        System.out.println(shoppingCart.getTotalValue().getText());
+        try {
+            Assert.assertEquals(shoppingCart.getTotalValue().getText(),"$30.81");
+            ExtentManager.pass("The total amount matches the expected amount.");
+        }catch(AssertionError e){
+            Assert.fail("Cart amount did not match the expected amount, it found " + shoppingCart.getTotalValue());
+            ExtentManager.fail("Failed!");
+        }
+
         shoppingCart.getProceedToCheckButton().click();
 
         OrderFormPersonalInfo personalInfo = new OrderFormPersonalInfo();

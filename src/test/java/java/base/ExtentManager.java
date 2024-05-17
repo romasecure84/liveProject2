@@ -1,4 +1,4 @@
-package test.java.base;
+package java.base;
 
 import com.aventstack.extentreports.ExtentReports;
 import com.aventstack.extentreports.ExtentTest;

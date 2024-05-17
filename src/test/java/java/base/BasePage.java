@@ -1,4 +1,4 @@
-package test.java.base;
+package java.base;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,7 +24,7 @@ public class BasePage {
 	public BasePage() throws IOException {
 		prop = new Properties();
 		FileInputStream data = new FileInputStream(
-				System.getProperty("user.dir") + "/src/main/java/resources/config.properties");
+				System.getProperty("user.dir") + "/src/test/java/resources/config.properties");
 		prop.load(data);
 	}
 

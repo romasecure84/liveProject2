@@ -1,11 +1,12 @@
-package test.java.resources;
+package java.resources;
 
-import base.BasePage;
-import base.ExtentManager;
+
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;
 
+import java.base.BasePage;
+import java.base.ExtentManager;
 import java.io.IOException;
 
 public class Listeners extends BasePage implements ITestListener {

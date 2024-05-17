@@ -1,11 +1,12 @@
-package test.java.pageObjects;
+package java.pageObjects;
 
-import base.BasePage;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 
+import java.base.BasePage;
 import java.io.IOException;
+import java.util.Base64;
 
 public class OrderFormShippingMethod extends BasePage {
     public WebDriver driver;

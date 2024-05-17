@@ -1,4 +1,4 @@
-package test.java.base;
+package java.base;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;

@@ -1,4 +1,4 @@
-package test.java.base;
+package java.base;
 
 import org.junit.BeforeClass;
 import org.testng.annotations.AfterTest;

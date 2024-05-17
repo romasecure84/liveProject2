@@ -1,6 +1,5 @@
-package test.java.tests;
+package java.tests;
 
-import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.Dimension;
 import org.openqa.selenium.Point;
 import org.openqa.selenium.WebDriver;
@@ -14,7 +13,7 @@ public class BaseTestClass {
     WebDriver driver;
     @BeforeClass
     public void setUp() {
-        WebDriverManager.chromedriver().setup();
+//        WebDriverManager.chromedriver().setup();
         driver = new ChromeDriver();
         driver.manage().window().setSize(new Dimension(1382, 744));
         driver.manage().window().setPosition(new Point(-8, -8));
